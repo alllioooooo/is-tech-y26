@@ -1,6 +1,7 @@
 package com.alllioooooo.bankingsystem.transactions;
 
 import com.alllioooooo.bankingsystem.accounts.Accountable;
+import com.alllioooooo.bankingsystem.exceptions.InvalidOperationException;
 
 public class DepositCommand implements Command {
     private final Accountable account;
@@ -13,12 +14,22 @@ public class DepositCommand implements Command {
 
     @Override
     public boolean execute() {
-        account.deposit(amount);
-        return true;
+        try {
+            account.deposit(amount);
+            return true;
+        } catch (InvalidOperationException e) {
+            System.out.println("Deposit failed: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean undo() {
-        return account.withdraw(amount);
+        try {
+            return account.withdraw(amount);
+        } catch (Exception e) {
+            System.out.println("Undo deposit failed: " + e.getMessage());
+            return false;
+        }
     }
 }
