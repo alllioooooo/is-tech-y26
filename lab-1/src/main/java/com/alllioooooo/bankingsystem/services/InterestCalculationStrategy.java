@@ -1,4 +1,5 @@
 package com.alllioooooo.bankingsystem.services;
 
-public class InterestCalculationStrategy {
+public interface InterestCalculationStrategy {
+    double calculateInterest(double balance, double interestRate);
 }
