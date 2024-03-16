@@ -12,6 +12,7 @@ public class Client implements Clientable {
     private String address;
     private String passportNumber;
 
+    // NOTE: подумай что наследники наверно тоже могут тут быть
     private List<Accountable> accounts = new ArrayList<>();
 
     protected Client(ClientBuilder builder) {

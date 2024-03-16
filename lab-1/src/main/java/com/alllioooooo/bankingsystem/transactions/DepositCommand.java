@@ -1,7 +1,9 @@
 package com.alllioooooo.bankingsystem.transactions;
 
 import com.alllioooooo.bankingsystem.accounts.Accountable;
+import com.alllioooooo.bankingsystem.exceptions.InsufficientFundsException;
 import com.alllioooooo.bankingsystem.exceptions.InvalidOperationException;
+import com.alllioooooo.bankingsystem.exceptions.UnauthorizedWithdrawalException;
 
 public class DepositCommand implements Command {
     private final Accountable account;
@@ -27,9 +29,12 @@ public class DepositCommand implements Command {
     public boolean undo() {
         try {
             return account.withdraw(amount);
-        } catch (Exception e) {
-            System.out.println("Undo deposit failed: " + e.getMessage());
-            return false;
+        } catch (UnauthorizedWithdrawalException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidOperationException e) {
+            throw new RuntimeException(e);
+        } catch (InsufficientFundsException e) {
+            throw new RuntimeException(e);
         }
     }
 }

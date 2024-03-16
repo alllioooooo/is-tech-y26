@@ -6,6 +6,7 @@ import com.alllioooooo.bankingsystem.bank.BankImpl;
 public class AccountFactory {
 
     public static Accountable createAccount(BankImpl bank, String type) {
+        // NOTE: enum
         switch (type) {
             case "Debit":
                 return new DebitAccount(bank.getDebitInterestRate(), bank.getWithdrawalLimitForSuspiciousAccounts());

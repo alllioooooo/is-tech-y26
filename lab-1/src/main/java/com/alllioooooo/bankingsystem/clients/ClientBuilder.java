@@ -1,5 +1,7 @@
 package com.alllioooooo.bankingsystem.clients;
 
+import java.util.Objects;
+
 public class ClientBuilder {
     String name;
     String surname;
@@ -27,9 +29,11 @@ public class ClientBuilder {
     }
 
     public Client build() {
+        // NOTE: Objects.requireNonNull()
         if (name == null || surname == null) {
             throw new IllegalStateException("Name and surname must not be null");
         }
+
         return new Client(this);
     }
 }

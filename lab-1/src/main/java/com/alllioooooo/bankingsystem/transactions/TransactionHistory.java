@@ -11,9 +11,11 @@ public class TransactionHistory {
     }
 
     public boolean undoTransaction(Command transaction) {
+        // NOTE: return transactions.contains(transaction) ? transaction.undo() : false;
         if (transactions.contains(transaction)) {
             return transaction.undo();
         }
+
         return false;
     }
 }

@@ -10,6 +10,7 @@ public class SuspiciousAccountValidator {
     }
 
     public static void validateAccount(Accountable account, Client client) {
+        //NOTE: isAccountSuspicious(client) ? account.setSuspicious(true) : account.setSuspicious(false);
         if (isAccountSuspicious(client)) {
             account.setSuspicious(true);
         } else {

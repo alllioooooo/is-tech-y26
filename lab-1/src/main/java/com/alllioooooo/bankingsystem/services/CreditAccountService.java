@@ -4,6 +4,8 @@ import com.alllioooooo.bankingsystem.accounts.Accountable;
 import com.alllioooooo.bankingsystem.accounts.CreditAccount;
 import com.alllioooooo.bankingsystem.bank.BankImpl;
 import com.alllioooooo.bankingsystem.exceptions.InsufficientFundsException;
+import com.alllioooooo.bankingsystem.exceptions.InvalidOperationException;
+import com.alllioooooo.bankingsystem.exceptions.UnauthorizedWithdrawalException;
 
 public class CreditAccountService {
     private Accountable account;
@@ -19,10 +21,8 @@ public class CreditAccountService {
             double commission = bank.getCreditCommission();
             try {
                 account.withdraw(commission);
-            } catch (InsufficientFundsException e) {
+            } catch (InsufficientFundsException | InvalidOperationException | UnauthorizedWithdrawalException e) {
                 System.out.println("Insufficient funds to apply commission.");
-            } catch (Exception e) {
-                System.out.println("Error applying commission: " + e.getMessage());
             }
         }
     }

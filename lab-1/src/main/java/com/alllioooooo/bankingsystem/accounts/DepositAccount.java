@@ -29,9 +29,11 @@ public class DepositAccount implements Accountable {
 
     @Override
     public boolean withdraw(double amount) throws InvalidOperationException, InsufficientFundsException, UnauthorizedWithdrawalException {
+        // NOTE: assert
         if (System.currentTimeMillis() < termEnds) {
             throw new InvalidOperationException("Cannot withdraw before term ends.");
         }
+
         if (amount <= 0) {
             throw new InvalidOperationException("Withdraw amount must be greater than zero.");
         }

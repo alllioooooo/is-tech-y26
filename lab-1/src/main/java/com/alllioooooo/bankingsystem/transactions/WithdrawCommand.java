@@ -19,9 +19,10 @@ public class WithdrawCommand implements Command {
         try {
             return account.withdraw(amount);
         } catch (InsufficientFundsException | InvalidOperationException e) {
-            System.out.println("Withdrawal failed: " + e.getMessage());
+            System.err.println("Withdrawal failed: " + e.getMessage());
             return false;
         } catch (UnauthorizedWithdrawalException e) {
+            //NOTE: throw Exception
             throw new RuntimeException(e);
         }
     }
@@ -29,10 +30,11 @@ public class WithdrawCommand implements Command {
     @Override
     public boolean undo() {
         try {
+            // NOTE: deposit return boolean value
             account.deposit(amount);
             return true;
         } catch (InvalidOperationException e) {
-            System.out.println("Undo withdrawal failed: " + e.getMessage());
+            System.err.println("Undo withdrawal failed: " + e.getMessage());
             return false;
         }
     }

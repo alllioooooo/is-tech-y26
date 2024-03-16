@@ -16,8 +16,6 @@ public class DepositAccountService {
             account.deposit(interest);
         } catch (InvalidOperationException e) {
             System.out.println("Invalid operation while applying interest: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error applying interest: " + e.getMessage());
         }
     }
 }

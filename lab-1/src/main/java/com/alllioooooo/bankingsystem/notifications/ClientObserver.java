@@ -1,6 +1,5 @@
 package com.alllioooooo.bankingsystem.notifications;
 
-
 public class ClientObserver implements Observer {
     private Notificationable notificationService;
 

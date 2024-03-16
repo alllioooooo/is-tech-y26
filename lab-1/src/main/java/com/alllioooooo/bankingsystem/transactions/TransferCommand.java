@@ -20,6 +20,7 @@ public class TransferCommand implements Command {
     public boolean execute() {
         try {
             if (fromAccount.withdraw(amount)) {
+                // NOTE: return toAccount.deposit(amount);
                 toAccount.deposit(amount);
                 return true;
             }
@@ -28,6 +29,7 @@ public class TransferCommand implements Command {
         } catch (UnauthorizedWithdrawalException e) {
             throw new RuntimeException(e);
         }
+
         return false;
     }
 
@@ -35,12 +37,19 @@ public class TransferCommand implements Command {
     public boolean undo() {
         try {
             if (toAccount.withdraw(amount)) {
+                //NOTE: maybe deposit return value will be boolean
                 fromAccount.deposit(amount);
                 return true;
             }
-        } catch (Exception e) {
-            System.out.println("Undo transfer failed: " + e.getMessage());
+        } catch (UnauthorizedWithdrawalException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidOperationException e) {
+            throw new RuntimeException(e);
+        } catch (InsufficientFundsException e) {
+            throw new RuntimeException(e);
         }
+
         return false;
     }
 }
+

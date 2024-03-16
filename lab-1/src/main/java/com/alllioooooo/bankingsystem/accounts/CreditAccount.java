@@ -28,19 +28,25 @@ public class CreditAccount implements Accountable {
 
     @Override
     public boolean withdraw(double amount) throws InvalidOperationException, InsufficientFundsException, UnauthorizedWithdrawalException {
+        // assert amount >= 0 && balance + creditLimit < amount;
         if (amount <= 0) {
             throw new InvalidOperationException("Withdraw amount must be greater than zero.");
         }
+
         if (isSuspicious && amount > withdrawalLimitForSuspiciousAccounts) {
             throw new UnauthorizedWithdrawalException("Withdrawal limit exceeded for suspicious account.");
         }
+
         if (balance + creditLimit < amount) {
             throw new InsufficientFundsException("Insufficient funds.");
         }
+
         balance -= amount;
         return true;
     }
 
+
+    // NOTE: maybe default method in interface
     @Override
     public void calculateInterest() {
         if (balance < 0) {
