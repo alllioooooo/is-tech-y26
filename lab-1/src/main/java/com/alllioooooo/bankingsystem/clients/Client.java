@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client implements Clientable {
-    private final String name;
-    private final String surname;
+    private String name;
+    private String surname;
     private String address;
     private String passportNumber;
 

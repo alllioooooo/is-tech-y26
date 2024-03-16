@@ -22,7 +22,7 @@ public class CentralBank {
     }
 
     public void transferBetweenBanks(Bank fromBank, Bank toBank, double amount) {
-        // тут нужно добавить логику перевода между разными банками но как то не могу придумать хзхзхзхзх
+        // тут нужно добавить логику перевода между разными банками но как то не могу придумать
         System.out.println("Transfer completed.");
     }
 
