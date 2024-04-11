@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CatService {
@@ -51,5 +52,14 @@ public class CatService {
 
     public List<Cat> findAllCats() {
         return catRepository.findAll();
+    }
+
+    public List<Cat> findCatsByOwnerId(Long ownerId) {
+        return catRepository.findByOwnerId(ownerId);
+    }
+
+    public Set<Cat> findCatFriends(Long id) {
+        Cat cat = findCatById(id);
+        return cat.getFriends();
     }
 }

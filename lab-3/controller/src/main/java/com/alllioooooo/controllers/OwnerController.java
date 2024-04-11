@@ -18,7 +18,7 @@ public class OwnerController {
 
     @GetMapping
     public ResponseEntity<List<Owner>> getAllOwners() {
-        List<Owner> owners = ownerService.findAllOwners();
+        List<Owner> owners = ownerService.findAllOwnersWithCats();
         return new ResponseEntity<>(owners, HttpStatus.OK);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/cats")
@@ -30,6 +31,12 @@ public class CatController {
     public ResponseEntity<Cat> getCatById(@PathVariable Long id) {
         Cat cat = catService.findCatById(id);
         return new ResponseEntity<>(cat, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/friends")
+    public ResponseEntity<Set<Cat>> getCatFriends(@PathVariable Long id) {
+        Set<Cat> friends = catService.findCatFriends(id);
+        return new ResponseEntity<>(friends, HttpStatus.OK);
     }
 
     @PostMapping
