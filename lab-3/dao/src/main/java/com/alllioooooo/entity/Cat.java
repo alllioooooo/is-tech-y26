@@ -26,9 +26,8 @@ public class Cat {
     @Column(nullable = false)
     private String color;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @Column(name = "owner_id")
+    private Long ownerId;
 
     @ManyToMany
     @JoinTable(
@@ -81,12 +80,12 @@ public class Cat {
         this.color = color;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public Set<Cat> getFriends() {

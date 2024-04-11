@@ -33,8 +33,8 @@ public class CatController {
     }
 
     @PostMapping
-    public ResponseEntity<Cat> addCat(@RequestBody Cat cat) {
-        Cat savedCat = catService.saveCat(cat);
+    public ResponseEntity<Cat> addCat(@RequestBody Cat cat, @RequestParam(required = false) Long ownerId) {
+        Cat savedCat = catService.saveCat(cat, ownerId);
         return new ResponseEntity<>(savedCat, HttpStatus.CREATED);
     }
 

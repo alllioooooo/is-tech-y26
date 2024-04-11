@@ -19,8 +19,8 @@ public class Owner {
     @Column(nullable = false)
     private String surname;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Cat> cats;
+    @Transient
+    private Set<Long> catIds = new HashSet<>();
 
     public Owner() {
     }
@@ -49,16 +49,11 @@ public class Owner {
         this.surname = surname;
     }
 
-    public Set<Cat> getCats() {
-        return cats;
+    public Set<Long> getCatIds() {
+        return catIds;
     }
 
-    public void setCats(Set<Cat> cats) {
-        this.cats = cats;
-    }
-
-    public void addCat(Cat cat) {
-        cats.add(cat);
-        cat.setOwner(this);
+    public void setCatIds(Set<Long> catIds) {
+        this.catIds = catIds;
     }
 }

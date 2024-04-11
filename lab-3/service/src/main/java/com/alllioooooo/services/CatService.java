@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-
 public class CatService {
 
     private final CatRepository catRepository;
@@ -25,7 +24,8 @@ public class CatService {
     }
 
     @Transactional
-    public Cat saveCat(Cat cat) {
+    public Cat saveCat(Cat cat, Long ownerId) {
+        cat.setOwnerId(ownerId); // Устанавливаем ownerId для Cat
         return catRepository.save(cat);
     }
 
@@ -39,7 +39,6 @@ public class CatService {
     public void addFriendship(Cat cat1, Cat cat2) {
         if (!cat1.getFriends().contains(cat2)) {
             cat1.getFriends().add(cat2);
-            cat2.getFriends().add(cat1);
             catRepository.save(cat1);
             catRepository.save(cat2);
         }
@@ -48,10 +47,6 @@ public class CatService {
     @Transactional
     public void deleteCat(Cat cat) {
         catRepository.delete(cat);
-    }
-
-    public List<Cat> findByOwner(Owner owner) {
-        return catRepository.findByOwner(owner);
     }
 
     public List<Cat> findAllCats() {

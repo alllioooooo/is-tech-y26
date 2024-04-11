@@ -1,6 +1,5 @@
 package com.alllioooooo.services;
 
-import com.alllioooooo.entity.Cat;
 import com.alllioooooo.entity.Owner;
 import com.alllioooooo.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,6 @@ public class OwnerService {
     public void deleteOwnerById(Long id) {
         Owner owner = ownerRepository.findById(id).orElseThrow(() -> new RuntimeException("Owner not found with id " + id));
         ownerRepository.delete(owner);
-    }
-
-    @Transactional
-    public void addCatToOwner(Cat cat, Owner owner) {
-        if (!owner.getCats().contains(cat)) {
-            owner.getCats().add(cat);
-            cat.setOwner(owner);
-            ownerRepository.save(owner);
-        }
     }
 
     public List<Owner> findAllOwners() {

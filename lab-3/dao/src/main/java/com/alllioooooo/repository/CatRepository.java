@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface CatRepository extends JpaRepository<Cat, Long> {
-    List<Cat> findByOwner(Owner owner);
 }
