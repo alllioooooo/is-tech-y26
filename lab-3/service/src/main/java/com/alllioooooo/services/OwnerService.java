@@ -15,11 +15,15 @@ import java.util.stream.Collectors;
 @Service
 public class OwnerService {
 
-    @Autowired
     private OwnerRepository ownerRepository;
 
-    @Autowired
     private CatRepository catRepository;
+
+    @Autowired
+    public OwnerService(OwnerRepository ownerRepository, CatRepository catRepository) {
+        this.ownerRepository = ownerRepository;
+        this.catRepository = catRepository;
+    }
 
     public Owner findOwnerById(Long id) {
         return ownerRepository.findById(id).orElseThrow(() -> new RuntimeException("Owner not found with id " + id));

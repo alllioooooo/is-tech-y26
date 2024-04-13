@@ -13,7 +13,7 @@ import java.util.Set;
 @Service
 public class CatService {
 
-    private final CatRepository catRepository;
+    private CatRepository catRepository;
 
     @Autowired
     public CatService(CatRepository catRepository) {
@@ -26,7 +26,7 @@ public class CatService {
 
     @Transactional
     public Cat saveCat(Cat cat, Long ownerId) {
-        cat.setOwnerId(ownerId); // Устанавливаем ownerId для Cat
+        cat.setOwnerId(ownerId);
         return catRepository.save(cat);
     }
 

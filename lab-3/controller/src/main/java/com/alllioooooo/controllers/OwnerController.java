@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/owners")
 public class OwnerController {
 
-    @Autowired
     private OwnerService ownerService;
+
+    @Autowired
+    public OwnerController(OwnerService ownerService) {
+        this.ownerService = ownerService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Owner>> getAllOwners() {
