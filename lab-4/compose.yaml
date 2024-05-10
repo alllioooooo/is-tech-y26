@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: lab-4-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lab-4
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./dao/src/main/java/com/alllioooooo/migration/:/docker-entrypoint-initdb.d/:ro
+    ports:
+      - "8432:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
