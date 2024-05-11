@@ -36,6 +36,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.hibernate.orm:hibernate-core:6.4.4.Final")
     testImplementation("org.mockito:mockito-core:4.8.0")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {

@@ -22,6 +22,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.hibernate.orm:hibernate-core:6.4.4.Final")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
