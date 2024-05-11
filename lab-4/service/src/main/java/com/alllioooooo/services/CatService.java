@@ -1,8 +1,12 @@
 package com.alllioooooo.services;
 
 import com.alllioooooo.entity.Cat;
+import com.alllioooooo.entity.Owner;
+import com.alllioooooo.entity.User;
 import com.alllioooooo.repository.CatRepository;
+import com.alllioooooo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +18,12 @@ public class CatService {
 
     private CatRepository catRepository;
 
+    private UserRepository userRepository;
+
     @Autowired
-    public CatService(CatRepository catRepository) {
+    public CatService(CatRepository catRepository, UserRepository userRepository) {
         this.catRepository = catRepository;
+        this.userRepository = userRepository;
     }
 
     public Cat findCatById(Long id) {
@@ -60,5 +67,20 @@ public class CatService {
     public Set<Cat> findCatFriends(Long id) {
         Cat cat = findCatById(id);
         return cat.getFriends();
+    }
+
+    public Long findOwnerIdByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(User::getOwner)
+                .map(Owner::getId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+    }
+
+    public boolean isOwner(Long catId, String username) {
+        return catRepository.findById(catId)
+                .map(Cat::getOwnerId)
+                .map(ownerId -> userRepository.findById(ownerId).orElseThrow())
+                .map(owner -> owner.getUsername().equals(username))
+                .orElse(false);
     }
 }
