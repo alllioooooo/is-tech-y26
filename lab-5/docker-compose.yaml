@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: lab-5-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lab-5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migration/:/docker-entrypoint-initdb.d/:ro
+    ports:
+      - "5532:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
